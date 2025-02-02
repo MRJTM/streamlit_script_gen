@@ -4,7 +4,6 @@
 
 import streamlit as st
 import os
-from llm_utils.gpt_api import gpt_client
 from langchain.document_loaders import TextLoader,Docx2txtLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings.openai import OpenAIEmbeddings
