@@ -1,3 +1,4 @@
 .idea
 llm_utils/__pycache__
 text_persist
+.streamlit
