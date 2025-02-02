@@ -4,12 +4,6 @@
 
 import streamlit as st
 import os
-from langchain.document_loaders import TextLoader,Docx2txtLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain_community.vectorstores import Chroma
-from langchain.chat_models import ChatOpenAI
-from langchain.chains.question_answering import load_qa_chain
 from openai import OpenAI
 from docx import Document
 
@@ -18,7 +12,6 @@ OPENAI_BASE_URL = st.secrets["BASE_URL"]
 os.environ['OPENAI_API_KEY'] =OPENAI_API_KEY
 os.environ['OPENAI_BASE_URL'] =OPENAI_BASE_URL
 
-# embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY,openai_api_base=OPENAI_BASE_URL)
 persist_directory='text_persist'
 collection_name='text_collection'
 # model_name="gpt-4o-mini-2024-07-18"
