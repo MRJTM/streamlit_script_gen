@@ -77,7 +77,7 @@ if uploaded_file is not None and (not st.session_state.get("uploaded_file") or u
     current_vectorstore = load_file(path)
     st.text_area(label="文件内容",value=current_vectorstore)
     st.session_state["current_vectorstore"]=current_vectorstore
-    os.unlink(uploaded_file.name)
+    os.unlink(path)
 
 # prompt输入
 st.header("产生剧本",divider="grey")

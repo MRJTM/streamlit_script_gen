@@ -5,7 +5,7 @@ st.set_page_config(
     page_icon="👋",
 )
 
-st.write("# Welcome to Visual AI ! 👋")
+st.write("# Welcome to Visal AI ! 👋")
 
 st.sidebar.success("请选择上面一个功能")
 
