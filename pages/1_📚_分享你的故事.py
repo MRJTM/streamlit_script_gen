@@ -39,11 +39,12 @@ if "messages" not in st.session_state:
 
 # Display chat messages from history on app rerun
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+    if "role" in message and "content" in message:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
 # 相应chat-input的输入
-if prompt := st.chat_input("What is up?"):
+if prompt := st.chat_input("你想聊点什么？"):
     # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)
