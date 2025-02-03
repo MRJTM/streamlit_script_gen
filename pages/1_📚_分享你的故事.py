@@ -27,7 +27,7 @@ def response_generator():
         model=st.session_state["openai_model"],
         messages=[
             {"role": m["role"], "content": m["content"]}
-            for m in st.session_state.messages
+            for m in st.session_state.messages if "role" in m and "content" in m
         ],
         stream=True,
     )
