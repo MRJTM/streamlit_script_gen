@@ -6,6 +6,8 @@ import streamlit as st
 import os
 from openai import OpenAI
 from docx import Document
+st.set_page_config(page_title="剧本创作", page_icon="📷")
+st.sidebar.header("请创作你的剧本")
 
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 OPENAI_BASE_URL = st.secrets["BASE_URL"]
@@ -68,7 +70,7 @@ uploaded_file=st.file_uploader("Choose a file")
 if uploaded_file is not None and (not st.session_state.get("uploaded_file") or uploaded_file.name != st.session_state.uploaded_file.get("name")):
     # Update the session state
     st.session_state["uploaded_file"] = {"name": uploaded_file.name, "data": uploaded_file}
-    path=os.path.join('.',uploaded_file.name)
+    path=os.path.join('..', uploaded_file.name)
     with open(path,'wb') as f:
         f.write(uploaded_file.getbuffer())
 

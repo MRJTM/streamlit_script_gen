@@ -1,7 +1,8 @@
 import streamlit as st
-import time
-import random
 from openai import OpenAI
+
+st.set_page_config(page_title="分享你的故事", page_icon="📈")
+st.sidebar.header("请分享你的故事")
 
 st.title("Visal Bot")
 
