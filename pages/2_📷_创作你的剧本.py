@@ -64,7 +64,9 @@ if "messages" not in st.session_state:
 
 st.title("VISAL AI剧本生成工具")
 
-st.header("上传文件",divider="grey")
+st.header("Step1：上传素材",divider="grey")
+
+st.subheader("方式一：上传文件",divider="grey")
 
 uploaded_file=st.file_uploader("Choose a file")
 if uploaded_file is not None and (not st.session_state.get("uploaded_file") or uploaded_file.name != st.session_state.uploaded_file.get("name")):
@@ -79,18 +81,31 @@ if uploaded_file is not None and (not st.session_state.get("uploaded_file") or u
     st.session_state["current_vectorstore"]=current_vectorstore
     os.unlink(path)
 
+# 增加手动输入一些文字的功能
+st.subheader("方式二：手动填写",divider="grey")
+
+user_input_text=st.text_area(label='请输入你的原始素材和故事',value="")
+if st.button(label='提交'):
+    if user_input_text is not None and len(user_input_text)>2:
+        st.session_state["user_input_text"]=user_input_text[:40000]
+
 # prompt输入
-st.header("产生剧本",divider="grey")
+st.header("Step2：产生剧本",divider="grey")
 # 增加时长的输入
 secs = st.number_input("产生视频时长（单位：秒）",value=60)
 
+story_source=st.radio(label="素材来源",options=["文件","手动填写"],horizontal=True,index=1)
 if st.button(label="生成"):
     script="demo剧本"
-    if "current_vectorstore" in st.session_state:
-        # 获取读取文件的内容
-        current_vectorstore=st.session_state['current_vectorstore']
+    if "current_vectorstore" in st.session_state or "user_input_text" in st.session_state:
+        if story_source==0:
+            # 获取读取文件的内容
+            story=st.session_state['current_vectorstore']
+        else:
+            story=st.session_state['user_input_text']
+
         # 组成prompt
-        prompt=st.session_state['prompt_tmp'].replace('aaaaa',current_vectorstore).replace('bbbbb',str(secs))
+        prompt=st.session_state['prompt_tmp'].replace('aaaaa',story).replace('bbbbb',str(secs))
         st.session_state["messages"].append(['user', prompt])
 
         # docs = current_vectorstore.similarity_search(prompt, 6)
@@ -100,7 +115,7 @@ if st.button(label="生成"):
         st.session_state["messages"].append(['assistant',answer])
 
     else:
-        st.write("请先上传文件")
+        st.write("请先上传素材")
 
 
 
