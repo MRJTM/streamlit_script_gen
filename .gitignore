@@ -2,3 +2,4 @@
 llm_utils/__pycache__
 text_persist
 .streamlit
+__pycache__/
